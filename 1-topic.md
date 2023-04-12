@@ -14,4 +14,59 @@ This is how a stack in coding works. This idea is that whatever was added last t
 
 ## Example 1
 
+```python
+import json
 
+def grant_username(username_attempt):
+    if check_user(username_attempt):
+        return f"{username_attempt} is avalible"
+    else: 
+        return "Username already in use"
+    
+def check_user(username_attempt):
+    f = open("data.json")
+    data = json.load(f)
+
+    if username_attempt in data:
+        return False
+    else:
+        return True
+
+username_attempt = input("What username would you like for your account?")
+print(grant_username(username_attempt))
+```
+
+Here we have an example that uses the stack to process data procedurally. After we attempt to check for an avalible username we would like to use, we are sent to the grant username function. This function however has another function call in the if statment that will determine how the rest of the function will proform. This is like us placing the grant username function on the bottom of the stack and then placing check user function on top of it. Therefore we have to complete the check user function to remove it off the stack before going back and completing what was on the stack below it. 
+
+If coding did not use a stack and instead did first in first out then we would not be able to complete this varification save it be in the same function which would make each function extrenuous.
+
+## Example 2
+```python
+shopping_list = []
+done = False
+
+while not done:
+    choice = input("ADD another item or REMOVE last input? (type DONE if finished)").lower()
+    
+    if choice == "add":
+        item = input("what item would you like to add?")
+        shopping_list.append(item)
+
+    elif choice == "remove":
+        shopping_list.pop()
+
+    elif choice == "done":
+        done = True
+```
+
+This is a simple organizing tool that can hold items in an array using a stack to be able to keep track of the last item added. Since we order the items in this data structure, we can easily remove the last item added.
+
+This can be really useful as you will see in this following activity.
+
+## Activity
+
+Here is a story to set the stage:
+
+You are a tour bus driver that sells tickets ahead of time so that passengers are able to reserve their spot on your bus. Unfortunatly you keep accidently overselling more tickets than seats avalible on your bus. Write a program where you can add new ticket buyers with their names to a list. Continue this process for as many tickets as you sell, then once you are ready to take the trip, if you have oversold tickets again, remove the ticket buyers that bought them most recently so that those that have resevered their spots FIRST are the ones that will take the seats.
+
+- [Solution](busdriver.py)
